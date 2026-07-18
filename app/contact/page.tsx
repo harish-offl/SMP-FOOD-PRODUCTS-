@@ -53,7 +53,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-white">Call / WhatsApp</h3>
-                  <p className="mt-1 text-[#B8B8B8]">+91 93639 73591</p>
+                  <p className="mt-1 text-[#B8B8B8]">+91 78459 34370</p>
                   <p className="text-xs text-[#7A7A7A] mt-1">Mon - Sat, 9:00 AM - 6:00 PM</p>
                 </div>
               </div>

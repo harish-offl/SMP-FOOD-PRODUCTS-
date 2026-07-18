@@ -1,7 +1,7 @@
 import type { CartItem } from '@/types';
 import { formatPrice } from '@/data/products';
 
-const SMP_WHATSAPP_NUMBER = '919363973591';
+const SMP_WHATSAPP_NUMBER = '917845934370';
 
 export function generateWhatsAppOrderUrl(
   items: CartItem[],

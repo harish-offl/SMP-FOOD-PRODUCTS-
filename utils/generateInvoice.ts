@@ -37,7 +37,7 @@ export function generateInvoice(
   doc.setFontSize(9);
   doc.setTextColor(textColor[0], textColor[1], textColor[2]);
   doc.text('Tamil Nadu, India', 14, 40);
-  doc.text('Phone: +91 93639 73591', 14, 45);
+  doc.text('Phone: +91 78459 34370', 14, 45);
   doc.text('Email: info@smpfoods.com', 14, 50);
 
   // Invoice Details (Right Side)
@@ -142,7 +142,7 @@ export function generateInvoice(
   doc.setFontSize(10);
   doc.setTextColor(mutedColor[0], mutedColor[1], mutedColor[2]);
   doc.text('Thank you for shopping with SMP Food Products!', 105, pageHeight - 20, { align: 'center' });
-  doc.text('For any queries, contact info@smpfoods.com or WhatsApp +91 93639 73591', 105, pageHeight - 15, { align: 'center' });
+  doc.text('For any queries, contact info@smpfoods.com or WhatsApp +91 78459 34370', 105, pageHeight - 15, { align: 'center' });
 
   // Save PDF
   doc.save(`Invoice_${orderId}.pdf`);
