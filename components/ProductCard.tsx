@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ShoppingBag, Phone, Star, Eye, Package } from 'lucide-react';
+import { ShoppingBag, Phone, Star, Package } from 'lucide-react';
 import { useState } from 'react';
 import type { Product } from '@/types';
 import { formatPrice } from '@/data/products';
@@ -35,12 +35,13 @@ export function ProductCard({ product }: ProductCardProps) {
     .slice(0, 2);
 
   return (
-    <div className="product-card group flex min-h-[420px] min-w-0 flex-col overflow-hidden">
+    <div className="product-card flex flex-col overflow-hidden">
+      {/* Image Section */}
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-[#1E1E20] to-[#262628]"
+        className="relative block h-52 w-full overflow-hidden bg-gradient-to-br from-[#1E1E20] to-[#262628] sm:h-56"
       >
-        {/* Badges */}
+        {/* Badges - top left */}
         <div className="absolute left-3 top-3 z-20 flex flex-col gap-1.5">
           {product.discount > 0 && (
             <span className="badge bg-[#7B3F21] text-white">
@@ -55,34 +56,30 @@ export function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        {/* Quick View */}
-        <div className="absolute right-3 top-3 z-20 flex h-8 w-8 translate-y-1 items-center justify-center rounded-full border border-white/[0.06] bg-[#171717]/80 text-smp-secondary opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-          <Eye size={14} />
-        </div>
-
-        {/* Image / Fallback */}
+        {/* Image or Placeholder */}
         {product.images[0] && !imgError ? (
           <img
             src={product.images[0]}
             alt={product.name}
             onError={() => setImgError(true)}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-[#7B3F21]/10 to-[#D79B3A]/5">
-            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[#7B3F21]/15">
-              <Package size={36} className="text-[#D79B3A]/60" />
+          <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#7B3F21]/10 to-[#D79B3A]/5">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#7B3F21]/15">
+              <Package size={32} className="text-[#D79B3A]/60" />
             </div>
-            <span className="text-3xl font-bold text-[#D79B3A]/30">
+            <span className="text-2xl font-bold text-[#D79B3A]/30">
               {initials}
             </span>
           </div>
         )}
       </Link>
 
-      {/* Content */}
-      <div className="flex min-w-0 flex-1 flex-col p-4">
-        <div className="mb-1.5 flex items-center justify-between gap-1">
+      {/* Content Section */}
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        {/* Category + Rating */}
+        <div className="flex items-center justify-between">
           <span className="truncate text-[10px] font-semibold uppercase tracking-[0.18em] text-smp-muted">
             {product.category}
           </span>
@@ -94,22 +91,25 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
-        <Link href={`/products/${product.slug}`} className="block min-w-0">
-          <h3 className="line-clamp-1 text-[15px] font-bold text-white transition-colors hover:text-[#D79B3A]">
+        {/* Name */}
+        <Link href={`/products/${product.slug}`}>
+          <h3 className="line-clamp-1 text-[15px] font-bold text-white hover:text-[#D79B3A] transition-colors">
             {product.name}
           </h3>
         </Link>
-        <p className="mt-1 line-clamp-2 min-h-[32px] text-xs leading-5 text-smp-secondary">
+
+        {/* Description */}
+        <p className="line-clamp-2 text-xs leading-5 text-smp-secondary">
           {product.shortDescription}
         </p>
 
-        <div className="mt-2 flex items-center gap-1.5">
-          <span className="rounded-md bg-white/[0.06] px-2 py-0.5 text-[10px] font-semibold text-smp-secondary">
-            {weight}
-          </span>
-        </div>
+        {/* Weight */}
+        <span className="w-fit rounded-md bg-white/[0.06] px-2 py-0.5 text-[10px] font-semibold text-smp-secondary">
+          {weight}
+        </span>
 
-        <div className="mt-auto flex items-baseline gap-2 pt-3">
+        {/* Price */}
+        <div className="flex items-baseline gap-2">
           <span className="text-lg font-bold text-white">
             {formatPrice(price)}
           </span>
@@ -120,7 +120,8 @@ export function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        <div className="mt-3 flex gap-2">
+        {/* Buttons - always at bottom */}
+        <div className="mt-auto flex gap-2 pt-2">
           <button
             onClick={handleAddToCart}
             className="flex h-10 flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#7B3F21] text-xs font-semibold text-white transition hover:bg-[#9A5A3A]"
